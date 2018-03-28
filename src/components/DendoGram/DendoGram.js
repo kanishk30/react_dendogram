@@ -6,7 +6,7 @@ class DendoGram extends Component {
   constructor(props) {
     super(props);
     this.createDendoGram = this.createDendoGram.bind(this);
-  }
+  } 
   componentDidMount() {
     this.createDendoGram();
   }
@@ -83,7 +83,7 @@ class DendoGram extends Component {
       );
     }
 
-    // define the zoomListener which calls the zoom function on the "zoom" event constrained within the scaleExtents
+    // define the zoomListener which calls the zoom function on the "zoom" event
     let zoomListener = behavior
       .zoom()
       .scaleExtent([0.1, 4])
@@ -104,8 +104,7 @@ class DendoGram extends Component {
       selectedNode = null;
     };
 
-    // Function to center node when clicked/dropped so node doesn't get lost when collapsing/moving with large amount of children.
-
+    // Function to center node when clicked/dropped 
     function centerNode(source) {
       scale = zoomListener.scale();
       let x = -source.y0;
@@ -147,8 +146,6 @@ class DendoGram extends Component {
 
     function update(source) {
       // Compute the new height, function counts total children of root node and sets tree height accordingly.
-      // This prevents the layout looking squashed when new nodes are made visible or looking sparse when nodes are removed
-      // This makes the layout more consistent.
       let levelWidth = [1];
       let childCount = function(level, n) {
         if (n.children && n.children.length > 0) {
@@ -171,9 +168,6 @@ class DendoGram extends Component {
       // Set widths between levels based on maxLabelLength.
       nodes.forEach(function(d) {
         d.y = d.depth * (maxLabelLength * 10); //horizontal  spacing between the levels
-        // alternatively to keep a fixed scale one can set a fixed depth per level
-        // Normalize for fixed-depth by commenting out below line
-        // d.y = (d.depth * 500); //500px per level.
       });
 
       // Update the nodes…
@@ -214,7 +208,7 @@ class DendoGram extends Component {
         })
         .style("fill-opacity", 0);
 
-      // phantom node to give us mouseover in a radius around it
+      // imaginary node to give us mouseover in a radius around it
       nodeEnter
         .append("circle")
         .attr("class", "ghostCircle")
